@@ -1,5 +1,6 @@
 package org.jdred.filmiki.external;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -20,9 +21,9 @@ public class RestClient {
         headers.add("Accept", "*/*");
     }
 
-    public String get(String uri) {
+    public <T> T get(String uri, ParameterizedTypeReference<T> typeReference) {
         HttpEntity<String> requestEntity = new HttpEntity<>("", headers);
-        ResponseEntity<String> responseEntity = rest.exchange(uri, HttpMethod.GET, requestEntity, String.class);
+        ResponseEntity<T> responseEntity = rest.exchange(uri, HttpMethod.GET, requestEntity, typeReference);
 
         return responseEntity.getBody();
     }

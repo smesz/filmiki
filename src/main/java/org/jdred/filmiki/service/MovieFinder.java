@@ -1,8 +1,12 @@
 package org.jdred.filmiki.service;
 
+import org.jdred.filmiki.data.OmdbMovieResponse;
+import org.jdred.filmiki.data.search.OmdbSearchMovieResponse;
 import org.jdred.filmiki.external.omdb.OmdbCaller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class MovieFinder {
@@ -14,11 +18,11 @@ public class MovieFinder {
         this.omdbCaller = omdbCaller;
     }
 
-    public String search(String query) {
+    public List<OmdbSearchMovieResponse> search(String query) {
         return omdbCaller.search(query);
     }
 
-    public String findById(String imdbId) {
+    public OmdbMovieResponse findById(String imdbId) {
         return omdbCaller.findById(imdbId);
     }
 }
